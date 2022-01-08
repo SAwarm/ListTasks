@@ -12,3 +12,4 @@
     $taskService = new TaskService($con, $task);
     $taskService->create();
 
+    header('Location: ./../views/new_task.php?include=1');
