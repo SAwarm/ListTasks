@@ -31,7 +31,7 @@
 					<ul class="list-group">
 						<li class="list-group-item"><a href="index.php">Tasks no completed</a></li>
 						<li class="list-group-item active"><a href="#">New task</a></li>
-						<li class="list-group-item"><a href="all_tasks.php">All task</a></li>
+						<li class="list-group-item"><a href="all_tasks.php">All tasks</a></li>
 					</ul>
 				</div>
 
@@ -42,7 +42,7 @@
 								<h4>New Task</h4>
 								<hr />
 
-								<form method="POST" action="./../controller/task_controller.php">
+								<form method="POST" action="./../controller/task_controller.php?action=create">
 									<div class="form-group">
 										<label>Description Task</label>
 										<input type="text" class="form-control" placeholder="Example: Run after launch" name="description_task">
