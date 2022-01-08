@@ -36,10 +36,10 @@
 								<h4>New Task</h4>
 								<hr />
 
-								<form>
+								<form method="POST" action="./../controller/task_controller.php">
 									<div class="form-group">
 										<label>Description Task</label>
-										<input type="text" class="form-control" placeholder="Example: Run after launch">
+										<input type="text" class="form-control" placeholder="Example: Run after launch" name="description_task">
 									</div>
 
 									<button class="btn btn-success">Save</button>
