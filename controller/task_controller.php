@@ -23,7 +23,9 @@
 
         $taskService = new TaskService($con, $task);
         $tasks = $taskService->recover();
+
         return $tasks;
+
     } else if ($action == 'update') {
         $task = new Task();
         $task->__set('id', $_POST['id']);
@@ -32,8 +34,9 @@
         $con = new Connection();
 
         $taskService = new TaskService($con, $task);
-        if ($taskService->update()) {
-            header('Location: ./../views/all_tasks.php');
+
+        if ($taskService->update() == 1) {
+            return header('Location: ./../views/all_tasks.php');
         }
 
     } else if ($action == 'delete') {

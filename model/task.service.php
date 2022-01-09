@@ -16,6 +16,7 @@ class TaskService {
         $query = 'INSERT INTO tb_tarefas(tarefa) values(:task)';
         $stmt = $this->connection->prepare($query);
         $stmt->bindValue(':task', $this->task->__get('task'));
+
         return $stmt->execute();
     }
 
@@ -36,6 +37,7 @@ class TaskService {
 
         $stmt = $this->connection->prepare($query);
         $stmt->execute();
+
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
