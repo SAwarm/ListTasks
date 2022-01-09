@@ -36,6 +36,11 @@
         $taskService = new TaskService($con, $task);
 
         if ($taskService->update() == 1) {
+
+            if (!empty($_GET['pag'])){
+                return header('Location: ./../views/index.php');
+            }
+
             return header('Location: ./../views/all_tasks.php');
         }
 
@@ -47,6 +52,11 @@
 
         $taskService = new TaskService($con, $task);
         if ($taskService->delete() == 1) {
+
+            if (!empty($_GET['pag'])){
+                return header('Location: ./../views/index.php');
+            }
+
             return header('Location: ./../views/all_tasks.php');
         }
     } else if ($action == "task_completed") {
@@ -58,6 +68,21 @@
 
         $taskService = new TaskService($con, $task);
         if ($taskService->taskCompleted() == 1) {
+
+            if (!empty($_GET['pag'])){
+                return header('Location: ./../views/index.php');
+            }
+
             return header('Location: ./../views/all_tasks.php');
         }
+    } else if ($action == 'recover_pending') {
+        $task = new Task();
+        $task->__set('id_status', 1);
+
+        $con = new Connection();
+
+        $taskService = new TaskService($con , $task);
+        $tasks_pending = $taskService->recoverPending();
+
+        return $tasks_pending;
     }

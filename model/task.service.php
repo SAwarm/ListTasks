@@ -70,4 +70,29 @@ class TaskService {
 
         return $stmt->execute();
     }
+
+    public function recoverPending()
+    {
+        $query = 'SELECT 
+                    t.id, s.status, tarefa AS task 
+                FROM 
+                    tb_tarefas 
+                AS 
+                    t
+                LEFT JOIN 
+                    tb_status
+                AS
+                    s
+                ON
+                    t.id_status = s.id
+                WHERE
+                    s.id = :id_status';
+
+        $stmt = $this->connection->prepare($query);
+        $stmt->bindValue(':id_status', $this->task->__get('id_status'));
+
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
 }
