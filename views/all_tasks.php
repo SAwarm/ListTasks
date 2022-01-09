@@ -52,6 +52,11 @@
 		{
 			location.href = './../controller/task_controller.php?action=delete&id='+id;
 		}
+
+		function taskCompleted(id)
+		{
+			location.href = './../controller/task_controller.php?action=task_completed&id='+id;
+		}
 	</script>
 	
 	</head>
@@ -90,8 +95,12 @@
 										</div>
 											<div class="col-sm-3 mt-2 d-flex justify-content-between">
 												<i class="fas fa-trash-alt fa-lg text-danger" onclick="deleteTask(<?= $value->id ?>)"></i>
-												<i class="fas fa-edit fa-lg text-info" onclick="update(<?= $value->id ?>, '<?= $value->task ?>')"></i>
-												<i class="fas fa-check-square fa-lg text-success"></i>
+
+												<?php if($value->status == 'pendente') { ?>
+													<i class="fas fa-edit fa-lg text-info" onclick="update(<?= $value->id ?>, '<?= $value->task ?>')"></i>
+													<i class="fas fa-check-square fa-lg text-success" onclick="taskCompleted(<?= $value->id ?>)"></i>
+												<?php } ?>
+
 											</div>
 									</div>
 								<?php } ?>

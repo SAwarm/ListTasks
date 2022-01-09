@@ -60,4 +60,14 @@ class TaskService {
         
         return $stmt->execute();
     }
+
+    public function taskCompleted()
+    {
+        $query = 'UPDATE tb_tarefas SET id_status= :id_status WHERE id = :id';
+        $stmt = $this->connection->prepare($query);
+        $stmt->bindValue(':id_status', $this->task->__get('id_status'));
+        $stmt->bindValue(':id', $this->task->__get('id'));
+
+        return $stmt->execute();
+    }
 }

@@ -49,4 +49,15 @@
         if ($taskService->delete() == 1) {
             return header('Location: ./../views/all_tasks.php');
         }
+    } else if ($action == "task_completed") {
+        $task = new Task();
+        $task->__set('id', $_GET['id']);
+        $task->__set('id_status', 2);
+        
+        $con = new Connection();
+
+        $taskService = new TaskService($con, $task);
+        if ($taskService->taskCompleted() == 1) {
+            return header('Location: ./../views/all_tasks.php');
+        }
     }
