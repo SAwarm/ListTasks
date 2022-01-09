@@ -13,10 +13,10 @@ class TaskService {
 
     public function create()
     {
-        $query = 'INSERT INTO tb_tarefas(tarefa) values(:tarefa)';
+        $query = 'INSERT INTO tb_tarefas(tarefa) values(:task)';
         $stmt = $this->connection->prepare($query);
-        $stmt->bindValue(':tarefa', $this->task->__get('task'));
-        $stmt->execute();
+        $stmt->bindValue(':task', $this->task->__get('task'));
+        return $stmt->execute();
     }
 
     public function recover()
