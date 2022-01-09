@@ -14,7 +14,7 @@
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 	
 	<script>
-		function editar(id, value_task) 
+		function update(id, value_task) 
 		{
 			let form = document.createElement('form');
 			form.action = './../controller/task_controller.php?action=update';
@@ -46,6 +46,11 @@
 			task_id.innerHTML = '';
 
 			task_id.insertBefore(form, task_id[0]);
+		}
+
+		function deleteTask(id)
+		{
+			location.href = './../controller/task_controller.php?action=delete&id='+id;
 		}
 	</script>
 	
@@ -84,8 +89,8 @@
 											<?= $value->task ?> (<?= $value->status ?>)
 										</div>
 											<div class="col-sm-3 mt-2 d-flex justify-content-between">
-												<i class="fas fa-trash-alt fa-lg text-danger"></i>
-												<i class="fas fa-edit fa-lg text-info" onclick="editar(<?= $value->id ?>, '<?= $value->task ?>')"></i>
+												<i class="fas fa-trash-alt fa-lg text-danger" onclick="deleteTask(<?= $value->id ?>)"></i>
+												<i class="fas fa-edit fa-lg text-info" onclick="update(<?= $value->id ?>, '<?= $value->task ?>')"></i>
 												<i class="fas fa-check-square fa-lg text-success"></i>
 											</div>
 									</div>

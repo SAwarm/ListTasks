@@ -36,4 +36,14 @@
             header('Location: ./../views/all_tasks.php');
         }
 
+    } else if ($action == 'delete') {
+        $task = new Task();
+        $task->__set('id', $_GET['id']);
+
+        $con = new Connection();
+
+        $taskService = new TaskService($con, $task);
+        if ($taskService->delete() == 1) {
+            return header('Location: ./../views/all_tasks.php');
+        }
     }

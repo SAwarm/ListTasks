@@ -52,6 +52,10 @@ class TaskService {
 
     public function delete()
     {
+        $query = 'DELETE FROM tb_tarefas where id = :id';
+        $stmt = $this->connection->prepare($query);
+        $stmt->bindValue(':id', $this->task->__get('id'));
         
+        return $stmt->execute();
     }
 }
