@@ -1,7 +1,7 @@
 <?php
 
-class TaskService {
-
+class TaskService
+{
     private $connection;
     private $task;
 
@@ -13,7 +13,11 @@ class TaskService {
 
     public function create()
     {
-        $query = 'INSERT INTO tb_tarefas(tarefa) values(:task)';
+        $query = 'INSERT INTO 
+                        tb_tarefas(tarefa) 
+                    VALUES
+                        (:task)';
+
         $stmt = $this->connection->prepare($query);
         $stmt->bindValue(':task', $this->task->__get('task'));
 
@@ -43,7 +47,12 @@ class TaskService {
 
     public function update()
     {
-        $query = 'UPDATE tb_tarefas set tarefa = :task where id = :id';
+        $query = 'UPDATE 
+                        tb_tarefas 
+                    SET 
+                        tarefa = :task 
+                    WHERE 
+                        id = :id';
 
         $stmt = $this->connection->prepare($query);
         $stmt->bindValue(':task', $this->task->__get('task'));
@@ -54,16 +63,26 @@ class TaskService {
 
     public function delete()
     {
-        $query = 'DELETE FROM tb_tarefas where id = :id';
+        $query = 'DELETE FROM 
+                        tb_tarefas 
+                    WHERE 
+                        id = :id';
+
         $stmt = $this->connection->prepare($query);
         $stmt->bindValue(':id', $this->task->__get('id'));
-        
+
         return $stmt->execute();
     }
 
     public function taskCompleted()
     {
-        $query = 'UPDATE tb_tarefas SET id_status= :id_status WHERE id = :id';
+        $query = 'UPDATE 
+                        tb_tarefas 
+                    SET 
+                        id_status= :id_status 
+                    WHERE 
+                        id = :id';
+
         $stmt = $this->connection->prepare($query);
         $stmt->bindValue(':id_status', $this->task->__get('id_status'));
         $stmt->bindValue(':id', $this->task->__get('id'));

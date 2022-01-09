@@ -13,10 +13,12 @@
         $con = new Connection();
 
         $taskService = new TaskService($con, $task);
-        $taskService->create();
 
-        return header('Location: ./../views/new_task.php?include=1');
+        if ($taskService->create() == 1) {
+            return header('Location: ./../views/new_task.php?include=1');
+        }
 
+        return false;
     } else if ($action == 'recover') {
         $task = new Task();
         $con = new Connection();
@@ -25,25 +27,23 @@
         $tasks = $taskService->recover();
 
         return $tasks;
-
     } else if ($action == 'update') {
         $task = new Task();
         $task->__set('id', $_POST['id']);
         $task->__set('task', $_POST['task']);
-        
+
         $con = new Connection();
 
         $taskService = new TaskService($con, $task);
 
         if ($taskService->update() == 1) {
 
-            if (!empty($_GET['pag'])){
+            if (!empty($_GET['pag'])) {
                 return header('Location: ./../views/index.php');
             }
 
             return header('Location: ./../views/all_tasks.php');
         }
-
     } else if ($action == 'delete') {
         $task = new Task();
         $task->__set('id', $_GET['id']);
@@ -53,23 +53,23 @@
         $taskService = new TaskService($con, $task);
         if ($taskService->delete() == 1) {
 
-            if (!empty($_GET['pag'])){
+            if (!empty($_GET['pag'])) {
                 return header('Location: ./../views/index.php');
             }
 
             return header('Location: ./../views/all_tasks.php');
         }
-    } else if ($action == "task_completed") {
+    } else if ($action == 'task_completed') {
         $task = new Task();
         $task->__set('id', $_GET['id']);
         $task->__set('id_status', 2);
-        
+
         $con = new Connection();
 
         $taskService = new TaskService($con, $task);
         if ($taskService->taskCompleted() == 1) {
 
-            if (!empty($_GET['pag'])){
+            if (!empty($_GET['pag'])) {
                 return header('Location: ./../views/index.php');
             }
 
@@ -81,7 +81,7 @@
 
         $con = new Connection();
 
-        $taskService = new TaskService($con , $task);
+        $taskService = new TaskService($con, $task);
         $tasks_pending = $taskService->recoverPending();
 
         return $tasks_pending;

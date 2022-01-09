@@ -19,7 +19,6 @@ class Connection
             );
 
             return $conn;
-
         } catch (PDOException $pe) {
             return '<p>' . $pe->getMessage() . '</p>';
         }
