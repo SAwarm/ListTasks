@@ -41,7 +41,13 @@ class TaskService {
 
     public function update()
     {
+        $query = 'UPDATE tb_tarefas set tarefa = :task where id = :id';
 
+        $stmt = $this->connection->prepare($query);
+        $stmt->bindValue(':task', $this->task->__get('task'));
+        $stmt->bindValue(':id', $this->task->__get('id'));
+
+        return $stmt->execute();
     }
 
     public function delete()

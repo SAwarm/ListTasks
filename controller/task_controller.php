@@ -24,4 +24,16 @@
         $taskService = new TaskService($con, $task);
         $tasks = $taskService->recover();
         return $tasks;
+    } else if ($action == 'update') {
+        $task = new Task();
+        $task->__set('id', $_POST['id']);
+        $task->__set('task', $_POST['task']);
+        
+        $con = new Connection();
+
+        $taskService = new TaskService($con, $task);
+        if ($taskService->update()) {
+            header('Location: ./../views/all_tasks.php');
+        }
+
     }
